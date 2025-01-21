@@ -635,7 +635,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
 
     private boolean mBlockedGesturalNavigation = false;
     
-    private int mQsHapticsIntensity = 1;
+    private int mQsHapticsIntensity = 0;
 
     private final SplitShadeStateController mSplitShadeStateController;
     private final Runnable mFlingCollapseRunnable = () -> fling(0, false /* expand */,
@@ -962,7 +962,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                         mResources.getBoolean(org.lineageos.platform.internal.R.bool.
                                 config_dt2sGestureEnabledByDefault) ? 1 : 0) != 0;
                 mQsHapticsIntensity = Settings.System.getInt(mContentResolver,
-                        "qs_haptics_intensity",1);
+                        "qs_haptics_intensity", 0);
                 mIsLockscreenDoubleTapEnabled = Settings.System.getInt(mContentResolver,
                         "double_tap_sleep_lockscreen", 1) != 0;
                 mFlingAnimationDuration = Settings.System.getInt(mContentResolver,
