@@ -157,7 +157,8 @@ public class ThemeOverlayApplier implements Dumpable {
             OVERLAY_CATEGORY_LOCK_CLOCK_FONT,
             OVERLAY_CATEGORY_PROGRESS_BAR,
             OVERLAY_CATEGORY_NOTIFICATION,
-            OVERLAY_CATEGORY_POWER_MENU);
+            OVERLAY_CATEGORY_POWER_MENU,
+            OVERLAY_CATEGORY_BRIGHTNESS_BAR);
 
     /* Categories that need to be applied to the current user as well as the system user. */
     @VisibleForTesting
