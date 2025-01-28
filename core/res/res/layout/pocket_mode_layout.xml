@@ -34,11 +34,10 @@
 
     <ImageView
         android:id="@+id/pocket_mode_phone_image"
-        android:layout_width="153dp"
-        android:layout_height="308dp"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
         android:src="@drawable/prevent_mode_img"
-        android:layout_centerInParent="true" 
-        android:layout_marginTop="52dp" />
+        android:layout_centerInParent="true"  />
 
     <TextView
         android:id="@+id/pocket_mode_hint_message"
