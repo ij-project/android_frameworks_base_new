@@ -130,6 +130,28 @@
         android:foreground="@drawable/keyguard_bottom_affordance_selected_border"
         android:visibility="invisible" />
 
+    <com.android.systemui.lockscreen.CustomKeyguardAffordanceView
+        android:id="@+id/start_shortcut"
+        android:layout_height="@dimen/keyguard_affordance_fixed_height"
+        android:layout_width="@dimen/keyguard_affordance_fixed_width"
+        android:layout_gravity="start|bottom"
+        android:layout_marginStart="@dimen/keyguard_affordance_horizontal_offset"
+        android:layout_marginBottom="@dimen/keyguard_affordance_vertical_offset"
+        android:scaleType="fitCenter"
+        android:padding="@dimen/keyguard_affordance_fixed_padding"
+        android:background="@drawable/keyguard_bottom_affordance_bg" />
+
+    <com.android.systemui.lockscreen.CustomKeyguardAffordanceView
+        android:id="@+id/end_shortcut"
+        android:layout_height="@dimen/keyguard_affordance_fixed_height"
+        android:layout_width="@dimen/keyguard_affordance_fixed_width"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/keyguard_affordance_horizontal_offset"
+        android:layout_marginBottom="@dimen/keyguard_affordance_vertical_offset"
+        android:scaleType="fitCenter"
+        android:padding="@dimen/keyguard_affordance_fixed_padding"
+        android:background="@drawable/keyguard_bottom_affordance_bg"/>
+
     <LinearLayout
         android:id="@+id/now_bar_area"
         android:layout_width="match_parent"

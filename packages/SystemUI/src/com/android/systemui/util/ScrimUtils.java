@@ -22,6 +22,7 @@ import android.os.Handler;
 
 import com.android.keyguard.NowBarController;
 import com.android.systemui.Dependency;
+import com.android.systemui.lockscreen.CustomKeyguardAffordanceViewController;
 import com.android.systemui.notifications.ui.PeekDisplayViewController;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.phone.ScrimController;
@@ -44,6 +45,7 @@ public class ScrimUtils {
     private final MediaArtUtils mMediaArtUtils;
     private final PeekDisplayViewController mPeekDisplayViewController;
     private final NowBarController mNowBarController;
+    private final CustomKeyguardAffordanceViewController mCustomKeyguardAffordanceViewController;
     
     private ExpansionState mExpansionState = ExpansionState.QS_NOT_EXPANDED;
 
@@ -79,6 +81,7 @@ public class ScrimUtils {
         mWallpaperDepthUtils = WallpaperDepthUtils.getInstance(mContext);
         mMediaArtUtils = MediaArtUtils.getInstance(mContext);
         mPeekDisplayViewController = PeekDisplayViewController.Companion.getInstance();
+        mCustomKeyguardAffordanceViewController = CustomKeyguardAffordanceViewController.Companion.getInstance();
         mNowBarController = NowBarController.getInstance(mContext);
         mStatusBarStateController.addCallback(mStatusBarStateListener);
         mStatusBarStateListener.onDozingChanged(mStatusBarStateController.isDozing());
@@ -99,6 +102,7 @@ public class ScrimUtils {
         mMediaArtUtils.setSubjectAlpha(subjectAlpha);
         mPeekDisplayViewController.setAlpha(subjectAlpha); 
         mNowBarController.setAlpha(subjectAlpha);
+        mCustomKeyguardAffordanceViewController.setAlpha(subjectAlpha); 
     }
 
     public void setQsExpansion(float expansion) {
@@ -113,11 +117,13 @@ public class ScrimUtils {
             mWallpaperDepthUtils.updateDepthWallpaper();
             mMediaArtUtils.updateMediaArtVisibility();
             mPeekDisplayViewController.showPeekDisplayView();
+            mCustomKeyguardAffordanceViewController.showAffordanceViews();
             mNowBarController.show();
         } else if (mExpansionState == ExpansionState.QS_FULLY_EXPANDED) {
             mMediaArtUtils.hideMediaArt();
             mWallpaperDepthUtils.hideDepthWallpaper();
             mPeekDisplayViewController.hidePeekDisplayView();
+            mCustomKeyguardAffordanceViewController.hideAffordanceViews();
             mNowBarController.hide();
         }
     }

@@ -101,8 +101,10 @@ class ActivityLauncherUtils(private val context: Context) {
         val launchIntent = context.packageManager.getLaunchIntentForPackage("com.google.android.apps.walletnfcrel")?.apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         }
-        launchIntent?.let {
-            launchAppIfAvailable(it, R.string.google_wallet)
+        if (launchIntent != null) {
+            launchAppIfAvailable(launchIntent, R.string.google_wallet)
+        } else {
+            showNoDefaultAppFoundToast(R.string.google_wallet)
         }
     }
 
@@ -115,6 +117,13 @@ class ActivityLauncherUtils(private val context: Context) {
         }
     }
 
+    fun launchCustomApp(packageName: String) {
+        val launchIntent = context.packageManager.getLaunchIntentForPackage(packageName)
+        launchIntent?.let {
+            activityStarter?.startActivity(it, true)
+        }
+    }
+
     fun startSettingsActivity() {
         val settingsIntent = Intent(android.provider.Settings.ACTION_SETTINGS)
         activityStarter?.startActivity(settingsIntent, true)
@@ -122,6 +131,31 @@ class ActivityLauncherUtils(private val context: Context) {
 
     fun startIntent(intent: Intent) {
         activityStarter?.startActivity(intent, true)
+    }
+
+    fun launchQrScanner() {
+        try {
+            val qrScannerComponent = context.resources.getString(
+                com.android.internal.R.string.config_defaultQrCodeComponent
+            )
+            val intent = if (qrScannerComponent.isNotEmpty()) {
+                Intent().apply {
+                    component = ComponentName.unflattenFromString(qrScannerComponent)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+            } else {
+                Intent().apply {
+                    component = ComponentName(
+                        "com.google.android.googlequicksearchbox",
+                        "com.google.android.apps.search.lens.LensActivity"
+                    )
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+            }
+            startIntent(intent)
+        } catch (e: Exception) {
+            Toast.makeText(context, "Unable to launch QR Scanner", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showNoDefaultAppFoundToast(@StringRes appTypeResId: Int) {
