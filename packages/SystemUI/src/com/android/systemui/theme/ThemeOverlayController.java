@@ -640,12 +640,12 @@ public class ThemeOverlayController implements CoreStartable, Dumpable, TunerSer
     public void onTuningChanged(String key, String newValue) {
         switch (key) {
             case PREF_CHROMA_FACTOR:
-                mChromaFactor =
-                        (float) TunerService.parseInteger(newValue, 100) / 100f;
+                float chromaFactor = (float) TunerService.parseInteger(newValue, 0) / 100f;
+                mChromaFactor = 1f + chromaFactor;
                 break;
             case PREF_LUMINANCE_FACTOR:
-                mLuminanceFactor =
-                        (float) TunerService.parseInteger(newValue, 100) / 100f;
+                float luminFactor = (float) TunerService.parseInteger(newValue, 0) / 100f;
+                mLuminanceFactor = 1f + luminFactor;
                 break;
             case PREF_TINT_BACKGROUND:
                 mTintBackground =
